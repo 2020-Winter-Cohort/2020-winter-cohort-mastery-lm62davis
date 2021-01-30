@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.*;
         public HashtagController(HashtagStorage hashtagStorage, PostStorage postStorage, HashtagRepository hashtagRepo, PostRepository postRepo){
             this.hashtagStorage = hashtagStorage;
             this.postStorage = postStorage;
-            this.hashtagRepo = hashtagRepo;
-            this.postRepo = postRepo;
+/*            this.hashtagRepo = hashtagRepo;
+            this.postRepo = postRepo;*/
         }
 
     @GetMapping("/hashtag/{id}")
@@ -32,17 +32,19 @@ import org.springframework.web.bind.annotation.*;
         return "single-hashtag-template";
         }
 
-    @GetMapping ("/allHashtags")
+    @GetMapping ("/hashtags")
     public String displayAllHashtags(Model model){
         model.addAttribute("allHashtags", hashtagStorage.retrieveAllHashtags());
         return "/all-hashtags-template";
     }
 
-        @PostMapping("/add/hashtag")
-        public String addHashtag(@RequestParam String newHashtag){
+        @PostMapping("/addHashtag")
+        public String addHashtag(@RequestParam String newHashtag, @RequestParam String postId){
             Hashtag hashtagToSave = new Hashtag(newHashtag);
             hashtagStorage.save(hashtagToSave);
-            return "redirect:/single-hashtag-template";
+            long id = Long.parseLong(postId);
+            postStorage.addHashtagToPost(id, hashtagToSave);
+            return "redirect:/posts/" + postId;
         }
 
         @PostMapping("/hashtag/post/{id}")

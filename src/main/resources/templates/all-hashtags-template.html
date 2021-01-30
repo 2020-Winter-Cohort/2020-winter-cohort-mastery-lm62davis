@@ -19,14 +19,14 @@
         </nav>
     </header>
     <main class="main-content">
-<!--        <section class="main-content__hashtags">
-            <h2><a th:text="${hashtag.tagName}" class="???" th:href=" 'hashtag/' + ${hashtag.id}">Hashtags</a>
-            </h2>
+        <section class="main-content__hashtags">
+
+         <h2>
             Hashtags
-        </h2>-->
+        </h2>
         <nav class="main-content__nav hashtag-list">
-        <h2 th:each="hashtag: ${hashtags}">
-        <a th:text="${hashtag}" th:href=" '/hashtag/' + ${hashtag.id}" href="#" class="???">Hashtag</a>
+        <h2 th:each="hashtag: ${allHashtags}">
+        <a th:text="${hashtag.tagName}" th:href=" '/hashtag/' + ${hashtag.id}"> Hashtag</a>
         </h2>
         </nav>
         </section>

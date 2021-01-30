@@ -22,6 +22,9 @@ public class Post {
     public Collection<Hashtag> getHashtags() {
         return hashtags;
     }
+    public void addHashtag(Hashtag postHashtag){
+        hashtags.add(postHashtag);
+    }
 
     protected Post() {
     }
@@ -54,9 +57,9 @@ public class Post {
         return author;
     }
 
+/*
 
-
-/*import java.time.LocalDateTime;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
     public class LocalDateTimeExample2 {
         public static void main(String[] args) {
