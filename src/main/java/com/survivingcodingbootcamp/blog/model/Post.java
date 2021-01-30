@@ -1,6 +1,8 @@
 package com.survivingcodingbootcamp.blog.model;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 public class Post {
@@ -12,14 +14,24 @@ public class Post {
     private Topic topic;
     @Lob
     private String content;
+    private String author;
+
+    @ManyToMany
+    private Collection <Hashtag> hashtags;
+
+    public Collection<Hashtag> getHashtags() {
+        return hashtags;
+    }
 
     protected Post() {
     }
 
-    public Post(String title, Topic topic, String content) {
+    public Post(String title, Topic topic, String content, String author, Hashtag...hashtags) {
         this.title = title;
         this.topic = topic;
         this.content = content;
+        this.author = author;
+        this.hashtags = List.of(hashtags);
     }
 
     public Long getId() {
@@ -37,6 +49,25 @@ public class Post {
     public String getContent() {
         return content;
     }
+
+    public String getAuthor(){
+        return author;
+    }
+
+
+
+/*import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+    public class LocalDateTimeExample2 {
+        public static void main(String[] args) {
+            LocalDateTime datetime1 = LocalDateTime.now();
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+            String formatDateTime = datetime1.format(format);
+            System.out.println(formatDateTime);
+        }
+    }*/
+
+
 
     @Override
     public String toString() {

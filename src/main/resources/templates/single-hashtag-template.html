@@ -1,14 +1,14 @@
-
 <!DOCTYPE html>
+
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8"/>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title th:text="${topic.name}">Topic</title>
+    <title th:text="${hashtag.tagName}">Hashtag</title>
 
-    <link rel="stylesheet" href="/css/style.css"/>
-    <link rel="stylesheet" href="/css/layout.css"/>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/layout.css" />
 </head>
 
 <body>
@@ -21,19 +21,14 @@
         </nav>
     </header>
     <main class="main-content">
-        <section class="main-content__topic topic">
-            <h2 th:text="${topic.name}" class="topic__title main-content__title">
-                Topic
-            </h2>
+        <section class="postInHash">
             <nav class="main-content__nav posts__nav">
-                <div th:each="post: ${topic.posts}">
-                    <a th:text="${post.title}" th:href="'/posts/'+${post.id}" href="#"
-                       class="posts__nav-link"></a>
-                </div>
+            <h2 th:each="post: ${hashtag.getPost()}">
+            <a th:text="${post.title}" th:href="'/posts/'+${post.id}" href="#"
+               class="posts__nav-link">Post</a></h2>
             </nav>
         </section>
     </main>
 </div>
 </body>
-
 </html>
