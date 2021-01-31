@@ -29,7 +29,7 @@ public class HashtagControllerTest {
         @BeforeEach
         void setUp() {
             hashtagStorage = mock(HashtagStorage.class);
-            underTest = new HashtagController(hashtagStorage, postStorage, hashtagRepo, postRepo);
+            underTest = new HashtagController(hashtagStorage, postStorage);
             model = mock(Model.class);
             testHashtag = new Hashtag("Test Hashtag");
             when(hashtagStorage.retrieveSingleHashtag(1L)).thenReturn(testHashtag);

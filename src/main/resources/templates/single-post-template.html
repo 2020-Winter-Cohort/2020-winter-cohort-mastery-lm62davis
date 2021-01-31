@@ -28,9 +28,9 @@
                 <p th:text="${post.content}" class="post__content">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Doloremque blanditiis, aut quae fuga id quis ut. 
                     Eligendi necessitatibus blanditiis officia, odio deleniti natus molestiae fugiat ex quod vel aliquam illum.
                 </p>
-                <h2 th:text="${post.author}" class="post__author">Post Author</h2>
+                <p th:text="${post.author}" class="post__author">Post Author</p>
                 <h2 th:each="hashtag: ${post.hashtags}">
-                    <a th:text="${hashtag.tagName}" th:href=" '/hashtag/' + ${hashtag.id}"> Hashtag</a>
+                <a th:text="${hashtag.tagName}" th:href=" '/hashtag/' + ${hashtag.id}"> Hashtag</a>
                 </h2>
             </section>
             <form action="/addHashtag" method="POST">

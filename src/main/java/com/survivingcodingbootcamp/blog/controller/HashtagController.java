@@ -16,14 +16,11 @@ import org.springframework.web.bind.annotation.*;
 
         private HashtagStorage hashtagStorage;
         private PostStorage postStorage;
-        private HashtagRepository hashtagRepo;
-        private PostRepository postRepo;
 
-        public HashtagController(HashtagStorage hashtagStorage, PostStorage postStorage, HashtagRepository hashtagRepo, PostRepository postRepo){
+
+        public HashtagController(HashtagStorage hashtagStorage, PostStorage postStorage){
             this.hashtagStorage = hashtagStorage;
             this.postStorage = postStorage;
-/*            this.hashtagRepo = hashtagRepo;
-            this.postRepo = postRepo;*/
         }
 
     @GetMapping("/hashtag/{id}")
