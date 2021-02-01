@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.sql.Time;
 import java.util.Collection;
 
 @Entity
@@ -34,6 +35,11 @@ public class Topic {
         return posts;
     }
 
+    public void addPost(Post newPost) {
+        posts.add(newPost);
+    }
+
+
     @Override
     public String toString() {
         return "Topic{" +
@@ -59,4 +65,5 @@ public class Topic {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         return result;
     }
+
 }

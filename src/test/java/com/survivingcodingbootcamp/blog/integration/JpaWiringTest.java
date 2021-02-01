@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DataJpaTest
@@ -28,11 +31,13 @@ public class JpaWiringTest {
     public void postsShouldHaveATopic() {
         Topic testTopic = new Topic("Name");
         topicRepo.save(testTopic);
+        LocalDateTime myDateObj = LocalDateTime.now();
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedDate = myDateObj.format(myFormatObj);
 
-
-        Post testPost1 = new Post("Title", testTopic, "Content", "Anonymous");
+        Post testPost1 = new Post("Title", testTopic, "Content", "Anonymous", formattedDate);
         postRepo.save(testPost1);
-        Post testPost2 = new Post("Another Title", testTopic, "Content", "Anonymous");
+        Post testPost2 = new Post("Another Title", testTopic, "Content", "Anonymous", formattedDate);
         postRepo.save(testPost2);
 
         entityManager.flush();

@@ -23,6 +23,7 @@ public class TopicControllerTest {
     @BeforeEach
     void setUp() {
         topicStorage = mock(TopicStorage.class);
+
         underTest = new TopicController(topicStorage);
         model = mock(Model.class);
         testTopic = new Topic("Test Topic");

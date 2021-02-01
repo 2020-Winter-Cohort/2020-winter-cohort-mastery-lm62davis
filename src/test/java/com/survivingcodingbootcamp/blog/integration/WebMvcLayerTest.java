@@ -10,6 +10,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -47,7 +50,10 @@ public class WebMvcLayerTest {
     @Test
     public void shouldReceiveOkAndViewOfPostTemplateFromSinglePostEndpoint() throws Exception {
         Topic testTopic = new Topic("Test Topic");
-        Post testPost = new Post("Test Post", testTopic, "Sample content.","Anonymous");
+        LocalDateTime myDateObj = LocalDateTime.now();
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+        String formattedDate = myDateObj.format(myFormatObj);
+        Post testPost = new Post("Test Post", testTopic, "Sample content.","Anonymous", formattedDate);
         when(postStorage.retrievePostById(1L)).thenReturn(testPost);
         mockMvc.perform(get("/posts/1"))
                 .andDo(print())

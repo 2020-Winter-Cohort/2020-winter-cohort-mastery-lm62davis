@@ -29,6 +29,7 @@
                     Eligendi necessitatibus blanditiis officia, odio deleniti natus molestiae fugiat ex quod vel aliquam illum.
                 </p>
                 <p th:text="${post.author}" class="post__author">Post Author</p>
+                <p th:text="${post.dateTime}" class="post__dateTime">Date/Time</p>
                 <h2 th:each="hashtag: ${post.hashtags}">
                 <a th:text="${hashtag.tagName}" th:href=" '/hashtag/' + ${hashtag.id}"> Hashtag</a>
                 </h2>
