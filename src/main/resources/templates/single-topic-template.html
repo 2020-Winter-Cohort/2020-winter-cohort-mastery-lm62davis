@@ -1,10 +1,13 @@
+
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title th:text="${topic.name}">Document</title>
+    <title th:text="${topic.name}">Topic</title>
 
     <link rel="stylesheet" href="/css/style.css"/>
     <link rel="stylesheet" href="/css/layout.css"/>
@@ -31,6 +34,24 @@
                 </div>
             </nav>
         </section>
+        <form name="addPost" class="addPost" action="/posts/addPost/" method="POST" >
+            <fieldset>
+                <legend>
+                    <h3>Add A New Post:</h3>
+                </legend>
+                <input type="hidden" name="topicId" th:value="${topic.id}" />
+                <label for="title">Title</label><br>
+                <input type ="text" name="title" id="title" />
+                <br>
+                <label for="content">Your Post</label><br>
+                <textarea name="content" id="content" rows="10" cols="100" wrap="hard" ></textarea>
+                <br>
+                <label for="author">Author</label><br>
+                <input type ="text" id="author" name="author" />
+                <br>
+                <button type="submit">Add Post</button><br>
+            </fieldset>
+        </form>
     </main>
 </div>
 </body>

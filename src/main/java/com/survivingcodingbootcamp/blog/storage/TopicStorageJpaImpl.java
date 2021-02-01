@@ -1,5 +1,7 @@
 package com.survivingcodingbootcamp.blog.storage;
 
+
+import com.survivingcodingbootcamp.blog.model.Post;
 import com.survivingcodingbootcamp.blog.model.Topic;
 import com.survivingcodingbootcamp.blog.storage.repository.TopicRepository;
 import org.springframework.stereotype.Service;
@@ -25,5 +27,11 @@ public class TopicStorageJpaImpl implements TopicStorage {
     @Override
     public void save(Topic topicToSave) {
         topicRepo.save(topicToSave);
+    }
+    @Override
+    public void addPostToTopic(long id, Post postToAdd) {
+        Topic newTopic = retrieveSingleTopic(id);
+        newTopic.addPost(postToAdd);
+        save(newTopic);
     }
 }

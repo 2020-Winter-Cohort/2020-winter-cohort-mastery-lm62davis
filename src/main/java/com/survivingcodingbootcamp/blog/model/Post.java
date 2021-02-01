@@ -1,6 +1,9 @@
 package com.survivingcodingbootcamp.blog.model;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Post {
@@ -12,14 +15,31 @@ public class Post {
     private Topic topic;
     @Lob
     private String content;
+    private String author;
+
+    @ManyToMany
+    private Collection<Hashtag> hashtags;
+
+    private String dateTime;
+
+    public Collection<Hashtag> getHashtags() {
+        return hashtags;
+    }
+
+    public void addHashtag(Hashtag postHashtag) {
+        hashtags.add(postHashtag);
+    }
 
     protected Post() {
     }
 
-    public Post(String title, Topic topic, String content) {
+    public Post(String title, Topic topic, String content, String author, String dateTime, Hashtag... hashtags) {
         this.title = title;
         this.topic = topic;
         this.content = content;
+        this.author = author;
+        this.dateTime = dateTime;
+        this.hashtags = List.of(hashtags);
     }
 
     public Long getId() {
@@ -38,6 +58,17 @@ public class Post {
         return content;
     }
 
+    public String getAuthor() {
+        return author;
+    }
+
+    public String getDateTime() {
+        return dateTime;
+    }
+
+
+
+
     @Override
     public String toString() {
         return "Post{" +
@@ -45,6 +76,7 @@ public class Post {
                 ", title='" + title + '\'' +
                 ", topic=" + topic +
                 ", content='" + content + '\'' +
+                ", author='" + author + '\'' +
                 '}';
     }
 
@@ -52,21 +84,13 @@ public class Post {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         Post post = (Post) o;
-
-        if (id != null ? !id.equals(post.id) : post.id != null) return false;
-        if (title != null ? !title.equals(post.title) : post.title != null) return false;
-        if (topic != null ? !topic.equals(post.topic) : post.topic != null) return false;
-        return content != null ? content.equals(post.content) : post.content == null;
+        return Objects.equals(id, post.id) && Objects.equals(title, post.title) && Objects.equals(topic, post.topic) && Objects.equals(content, post.content) && Objects.equals(author, post.author);
     }
 
     @Override
     public int hashCode() {
-        int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (title != null ? title.hashCode() : 0);
-        result = 31 * result + (topic != null ? topic.hashCode() : 0);
-        result = 31 * result + (content != null ? content.hashCode() : 0);
-        return result;
+        return Objects.hash(id, title, topic, content, author);
     }
 }
+
